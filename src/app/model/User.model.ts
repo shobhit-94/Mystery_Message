@@ -40,7 +40,10 @@ const UserSchema = new Schema({
     trim: true,
     unique: true,
     match: [/^[\w.-]+@[\w.-]+\.\w{2,}$/, "Please use a valid email address"],
-    password: [true, "Password is required"],
+  },
+  password: {
+    type: String,
+    required: [true, "Password code is required"],
   },
   verifyCode: {
     type: String,
