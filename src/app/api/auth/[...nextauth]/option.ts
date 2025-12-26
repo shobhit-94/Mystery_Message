@@ -46,6 +46,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     //configuration/callbacks
     async session({ session, user, token }) {
+      //seesion me bhi ek user object ke ander sari details add ker di hai dekho yaha ypes/next-auth.d.ts  file me
       if (user) {
         session.user._id = token._id;
         session.user.isVerified = token.isVerified;
@@ -55,6 +56,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, user }) {
+      //jwt me bhi user ke sare fileds add ker diya hai dekho yaha ypes/next-auth.d.ts file me
       if (user) {
         //ye user jwt ka ise asa mat sochna ki jo humara user hai or sari value verifyCode ,isVerified, verifyCodeExpiry, isAcceptingMessage
         //isliye pehle types/next-auth.d.ts file me is user me ye sare types add kero phir yaha access kro
@@ -69,7 +71,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     //configuration/pages
-    signIn: "sign-in",
+    signIn: "/sign-in",
     // signIn: "/auth/signin",
     // signOut: "/auth/signout",//ye to maincustom bananuuga baki niche to asas ho copy-paste ker diye site se
     // error: "/auth/error", // Error code passed in query string as ?error=

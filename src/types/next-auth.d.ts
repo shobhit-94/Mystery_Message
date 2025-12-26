@@ -2,7 +2,7 @@ import "next-auth";
 import { DefaultSession } from "next-auth";
 declare module "next-auth" {
   interface User {
-    // ye  jwt me user details me access ker sakte hai
+    // ye  default user details  ko extend ker re hai  kere re  hai
     _id?: string;
     isVerified?: boolean;
     isAcceptingMessage?: boolean;
