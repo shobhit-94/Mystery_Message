@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         return Response.json(
           {
             success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
-            message: "USer already exists with the email",
+            message: "USer already exists and verified with the email",
           },
           { status: 400 }
         );
@@ -51,14 +51,14 @@ export async function POST(request: Request) {
       //fresh enew user visited the website so save it data into databse first then send veririfiacation email
       const hashedpassword = await bcrypt.hash(password, 10);
       const expiryDate = new Date();
-      expiryDate.setHours(expiryDate.getHours() + 1);
+      expiryDate.setHours(expiryDate.getHours() + 24);
 
       const newUser = new UserModel({
         username,
         email,
         password: hashedpassword,
-        verifyCode: verifyCode,
-        isVerified: verifyCode,
+        verifyCode,
+        isVerified: false,
         verifyCodeExpiry: expiryDate,
         isAcceptingMessage: true,
         messages: [],
