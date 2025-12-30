@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       return Response.json(
         {
           success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
-          message: "USer already present or already taken",
+          message: "User already present or already taken",
         },
         { status: 400 }
       );
@@ -35,6 +35,14 @@ export async function POST(request: Request) {
           {
             success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
             message: "USer already exists and verified with the email",
+          },
+          { status: 400 }
+        );
+      } else if (!existingUserByEmail.isVerified) {
+        return Response.json(
+          {
+            success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
+            message: "email already exits",
           },
           { status: 400 }
         );
@@ -73,7 +81,7 @@ export async function POST(request: Request) {
           message: emailResponse.message,
         },
         {
-          status: 200,
+          status: 500,
         }
       );
     }

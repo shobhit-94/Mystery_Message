@@ -17,15 +17,16 @@ const MessageSchema: Schema<Message> = new Schema({
   },
 });
 export interface User extends Document {
-    username: string;
-    email: string;
-    password: string;
-    verifyCode: string;
-    isVerified: boolean;
-    verifyCodeExpiry: Date;
-    isAcceptingMessage: boolean;
-    messages: [];
-    createdAt: Date;
+  username: string;
+  email: string;
+  password: string;
+  verifyCode: string;
+  isVerified: boolean;
+  verifyCodeExpiry: Date;
+  isAcceptingMessage: boolean;
+  messages: Message[];
+
+  createdAt: Date;
 }
 const UserSchema = new Schema({
   username: {
