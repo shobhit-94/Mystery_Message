@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   //to getserversession se current Seesion me se hum current logged in user nikal lenge
   const user = session?.user;
 
-  if (!user || session.user) {
+  if (!user || !session.user) {
     return Response.json(
       {
         success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
@@ -60,7 +60,7 @@ export async function GET() {
     const session = await getServerSession(authOptions);
     const user = session?.user;
 
-    if (!user || session.user) {
+    if (!user || !session.user) {
       return Response.json(
         {
           success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
@@ -82,9 +82,10 @@ export async function GET() {
     }
     return Response.json(
       {
+        //NOTE:jo jo chize yaha return ker re ho vo APIresponse me honi chhaiye
         success: true,
         message: "User Acceptance Status",
-        data: FoundedUser?.isAcceptingMessage,
+        isAcceptinhMessages: FoundedUser?.isAcceptingMessage,
       },
       { status: 200 }
     );

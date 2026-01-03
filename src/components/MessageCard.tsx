@@ -1,5 +1,4 @@
-import React from "react";
-("use client");
+"use client";
 import {
   Card,
   CardAction,

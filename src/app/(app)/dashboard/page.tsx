@@ -1,3 +1,4 @@
+"use client";
 import { Message } from "@/app/model/User.model";
 import { acceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { useSession } from "next-auth/react";
@@ -23,9 +24,11 @@ const page = () => {
     );
   };
 
-  const { data: session } = useSession();
-  const form = useForm<z.infer<typeof acceptMessageSchema>>({});
-  resolver: zodResolver(acceptMessageSchema);
+  const { data: session, status } = useSession(); //status may be 'unauthenticated
+  const form = useForm<z.infer<typeof acceptMessageSchema>>({
+    resolver: zodResolver(acceptMessageSchema),
+  });
+
   const {
     //ye sare method budefault hook-form se milte hai jake getstated me me dekho reat-hook-forms ke
     register, //humne de-structure ker liye
@@ -108,7 +111,9 @@ const page = () => {
   };
   return (
     <>
-      if(!session ||!session.user)<div>Please login</div>
+      {status === "unauthenticated" && <div>Please login</div>}
+      {status === "loading" && <div>loading</div>}
+
       <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
         <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
         <div className="mb-4">
@@ -153,7 +158,7 @@ const page = () => {
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           {messages.length > 0 ? (
             messages.map((message, index) => (
-              <MessageCard// ye bana hai components/ folder me 
+              <MessageCard // ye bana hai components/ folder me
                 key={message._id.toString()}
                 message={message}
                 onMessageDelete={handleDeleteMessage}

@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   //to getserversession se current Seesion me se hum current logged in user nikal lenge
   const user = session?.user;
 
-  if (!user || session.user) {
+  if (!user || !session.user) {
     return Response.json(
       {
         success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
