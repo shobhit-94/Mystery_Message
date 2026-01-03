@@ -6,7 +6,7 @@ import { useDebounceCallback, useDebounceValue } from "usehooks-ts";
 import { toast } from "sonner";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
-// import { signUpSchema } from "@/schemas/signUpSchema";
+import { signUpSchema } from "@/schemas/signUpSchema";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
@@ -19,7 +19,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { Link, Loader2 } from "lucide-react";
 
@@ -57,24 +57,24 @@ const page = () => {
   //     confirmPassword: z.string().min(6),
   //   }),
   // });
-  const usernamevalidation = z
-    .string()
-    .min(2, "username must be atleast 2 characters")
-    .max(20, "uername must be atmost 20 characters")
-    .regex(
-      /^[a-zA-Z0-9_]+$/,
-      "please write only alphabets ,not alphabets in username"
-    );
-  //ato z or A-Z or 0-9 or _ insab se milker hi bana hona chahye username
+  // const usernamevalidation = z
+  //   .string()
+  //   .min(2, "username must be atleast 2 characters")
+  //   .max(20, "uername must be atmost 20 characters")
+  //   .regex(
+  //     /^[a-zA-Z0-9_]+$/,
+  //     "please write only alphabets ,not alphabets in username"
+  //   );
+  // //ato z or A-Z or 0-9 or _ insab se milker hi bana hona chahye username
 
-  const signUpSchema = z.object({
-    username: usernamevalidation, //usernamevalidation ko reuse ker liya yaha per
-    email: z.string().email({ message: "Invalid email address" }),
-    password: z.object({
-      password: z.string().min(6),
-      confirmPassword: z.string().min(6),
-    }),
-  });
+  // const signUpSchema = z.object({
+  //   username: usernamevalidation, //usernamevalidation ko reuse ker liya yaha per
+  //   email: z.string().email({ message: "Invalid email address" }),
+  //   password: z.object({
+  //     password: z.string().min(6),
+  //     confirmPassword: z.string().min(6),
+  //   }),
+  // });
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     //is form me bas signupschmea type ki values hi aa sakti hai humne set kerdiya z.infer se type
@@ -157,7 +157,7 @@ const page = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter username"
-                      {...field}
+                      {...field}//hum konsa field use ker re hai for ex yaha per username hai to "username" uper likho name="username"
                       onChange={(e) => {
                         field.onChange(e);
                         debounced(e.target.value);
@@ -250,9 +250,8 @@ const page = () => {
         <div className="text-center mt-4">
           <p>
             Already a member?{``}
-            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
-              Signin
-            </Link>
+            <a href="/sign-in"  className="text-blue-600 hover:text-blue-800">Sign in</a>
+   
           </p>
         </div>
       </div>

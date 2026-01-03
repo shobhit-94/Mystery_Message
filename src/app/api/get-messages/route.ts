@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     );
   }
   //kyuki aggregation me dikkat kerga humne option.ts file me session me
-  //user._id.toString() me convert kiya tha jo dinByIdAndUpdate ,findById me to
+  //user._id.toString() me convert kiya tha jo fsinByIdAndUpdate ,findById me to
   //chal zata hai lekin aggration piplines me problem kerga isliye use
   //ObjectId me convert ker lo
 

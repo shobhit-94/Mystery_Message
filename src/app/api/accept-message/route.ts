@@ -84,7 +84,7 @@ export async function GET() {
       {
         success: true,
         message: "User Acceptance Status",
-        isAcceptingMessage: FoundedUser?.isAcceptingMessage,
+        data: FoundedUser?.isAcceptingMessage,
       },
       { status: 200 }
     );
