@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
-import { Button } from "@react-email/components";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Loader2, RefreshCcw } from "lucide-react";
@@ -23,6 +23,8 @@ const page = () => {
       messages.filter((message) => message._id.toString() !== messageId)
     );
   };
+  const [profileUrl, setProfileUrl] = useState<string>("");
+  const [baseUrl, setBaseUrl] = useState("");
 
   const { data: session, status } = useSession(); //status may be 'unauthenticated
   const form = useForm<z.infer<typeof acceptMessageSchema>>({
@@ -102,17 +104,32 @@ const page = () => {
   //next-auth.d file me dekho session wla waha username hai
   const username = session?.user.username;
   //TODO do more reseacrh
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${username}`;
+  useEffect(() => {
+    setBaseUrl(`${window.location.protocol}//${window.location.host}`);
+  }, []);
+  useEffect(() => {
+    //if you not use effect then it will only run first time
+    if (!session?.user?.username) return;
+
+    setBaseUrl(`${window.location.protocol}//${window.location.host}`);
+    setProfileUrl(`${baseUrl}/u/${session.user.username}`);
+    console.log("baseURL = ", baseUrl);
+  }, [session]);
+
   const coptyToClipboard = () => {
+    console.log("hello");
     if (!profileUrl) return;
+
     navigator.clipboard.writeText(profileUrl);
     toast.success("URL copied to clipboard");
   };
+  if (status === "loading") return <div>Loading...</div>;
+  if (status === "unauthenticated") return <div>Please login</div>;
+
   return (
     <>
-      {status === "unauthenticated" && <div>Please login</div>}
-      {status === "loading" && <div>loading</div>}
+      {/* {status === "unauthenticated" && <div>Please login</div>}
+      {status === "loading" && <div>loading</div>} */}
 
       <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
         <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
@@ -125,7 +142,14 @@ const page = () => {
               disabled
               className="input input-bordered w-full p-2 mr-2"
             />
-            <Button onClick={() => coptyToClipboard}>Copy</Button>
+            <Button
+              onClick={() => {
+                coptyToClipboard();
+                console.log("click");
+              }}
+            >
+              Copy
+            </Button>
           </div>
         </div>
         ;

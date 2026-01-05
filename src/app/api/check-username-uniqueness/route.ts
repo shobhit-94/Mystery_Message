@@ -36,12 +36,12 @@ export async function GET(request: Request) {
       //   console.log(result.error.issues);
     }
     const { username } = result.data;
- console.log(username, "username");
+    console.log(username, "username");
     const user = await UserModel.findOne({
       username: username,
       isVerified: true,
     });
-   
+
     if (user) {
       return Response.json(
         {

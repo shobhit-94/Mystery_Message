@@ -5,9 +5,18 @@ import React from "react";
 import { useSession, signOut } from "next-auth/react";
 import { User } from "next-auth";
 import { Button } from "./ui/button";
+import { usePathname, useRouter } from "next/navigation";
 const Navbar = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   const { data: session } = useSession();
-  const user = session?.user ;
+  const user = session?.user;
+  const handleSignin = () => {
+    // setTimeout(() => {
+    //   router.replace("/sign-in");
+    // }, 2000);
+    router.replace("/sign-in");
+  };
   return (
     <nav className="p-4 md:p-6 shadow-md">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -16,20 +25,22 @@ const Navbar = () => {
         </a>
         {session ? (
           <>
-            <span className="mr-4 decoration-2 text-2xl">
-              Welcome , {user?.username || user?.email}
+            <span className=" font-bold   text-xl flex flex-row   items-center gap-3">
+              {" "}
+              Welcome
+              <span className="text-xl font-semibold md:text-xl  ">
+                {user?.username || user?.email}
+              </span>
             </span>
-            <Button className="w-full md:w-auto" onClick={() => signOut()}>
+            <Button className=" my-4 md:w-auto" onClick={() => signOut()}>
               Logout
             </Button>
           </>
         ) : (
           <>
-            {
-              <a href="" className="w-full md:w-auto">
-                Login
-              </a>
-            }
+            {pathname !== "/sign-in" && (
+              <Button onClick={handleSignin}>Signin</Button>
+            )}
           </>
         )}
       </div>

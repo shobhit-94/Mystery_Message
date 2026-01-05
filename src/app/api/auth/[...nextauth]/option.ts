@@ -10,7 +10,11 @@ export const authOptions: NextAuthOptions = {
       id: "credentials",
       name: "credentials",
       credentials: {
-        identifier: { label: "Email or username", type: "text", placeholder: "jsmith" },
+        identifier: {
+          label: "Email or username",
+          type: "text",
+          placeholder: "jsmith",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any): Promise<any> {
@@ -35,7 +39,7 @@ export const authOptions: NextAuthOptions = {
           if (isPasswordCorrect) {
             return user;
           } else {
-            throw new Error("Incrrect password");
+            throw new Error("Incorrect password");
           }
         } catch (error: any) {
           throw new Error(error);
@@ -47,12 +51,13 @@ export const authOptions: NextAuthOptions = {
     //configuration/callbacks
     async session({ session, user, token }) {
       //seesion me bhi ek user object ke ander sari details add ker di hai dekho yaha ypes/next-auth.d.ts  file me
-      if (user) {
+      
         session.user._id = token._id;
         session.user.isVerified = token.isVerified;
         session.user.isAcceptingMessage = token.isAcceptingMessage;
         session.user.username = token.username;
-      }
+        // console.log("session ", session);
+      
       return session;
     },
     async jwt({ token, user }) {
@@ -65,6 +70,7 @@ export const authOptions: NextAuthOptions = {
         token.isVerified = user.isVerified;
         token.isAcceptingMessage = user.isAcceptingMessage;
         token.username = user.username;
+        // console.log("token", token);
       }
       return token;
     },

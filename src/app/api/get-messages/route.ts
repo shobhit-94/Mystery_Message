@@ -30,9 +30,9 @@ export async function GET(request: Request) {
 
   //for some clarity in aggreation https://www.mongodb.com/docs/manual/aggregation/
   const User = await UserModel.aggregate([
-    { $match: { id: userId } },
+    { $match: { _id: userId } },
     { $unwind: "$messages" }, //Note her mesages ki _id user ki id hi hogi unwind/khune ke baad tabhi hum sort ke baad unhe wapas se collect ker paegnge
-    { $sort: { "$messages.createdAt": -1 } }, //$sort – sort messages by date
+    { $sort: { "messages.createdAt": -1 } }, //$sort – sort messages by date
     { $group: { _id: "$_id", messages: { $push: "$messages" } } }, //put messages back into array id me _id dalo or messages me $messages
   ]);
   if (!User || User.length === 0) {
