@@ -15,14 +15,14 @@ import { Separator } from "@/components/ui/separator";
 import { Loader2, RefreshCcw } from "lucide-react";
 import MessageCard from "@/components/MessageCard";
 import { Label } from "@/components/ui/label";
-const page = () => {
+const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [annoyms_messages, setannoyms_messages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
   const handleDeleteMessage = (messageId: string) => {
     setMessages(
-      messages.filter((message) => message._id.toString() !== messageId)
+      messages.filter((message) => message._id.toString() !== messageId),
     );
   };
   const [profileUrl, setProfileUrl] = useState<string>("");
@@ -75,14 +75,14 @@ const page = () => {
     console.log("msg to delete", msg);
     try {
       const response = await axios.delete<ApiResponse>(
-        `/api/delete-message?messageId=${msg._id}`
+        `/api/delete-message?messageId=${msg._id}`,
       );
       toast.success(response.data.message);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(
         "Error " + axiosError.response?.data.message ||
-          "failed to delete message"
+          "failed to delete message",
       );
     } finally {
       setIsSwitchLoading(false);
@@ -99,7 +99,7 @@ const page = () => {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(
         "Error " + axiosError.response?.data.message ||
-          "failed to fetch messages"
+          "failed to fetch messages",
       );
     } finally {
       setIsSwitchLoading(false);
@@ -119,13 +119,13 @@ const page = () => {
         const axiosError = error as AxiosError<ApiResponse>;
         toast.error(
           "Error " + axiosError.response?.data.message ||
-            "failed to fetch messages"
+            "failed to fetch messages",
         );
       } finally {
         setLoading(false);
       }
     },
-    [setLoading, setMessages]
+    [setLoading, setMessages],
   );
   useEffect(() => {
     if (!session || !session.user) return;
@@ -146,7 +146,7 @@ const page = () => {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(
         "Error " + axiosError.response?.data.message ||
-          "failed to fetch messages"
+          "failed to fetch messages",
       );
     }
   };
@@ -191,6 +191,7 @@ const page = () => {
               value={profileUrl} //user ko dihta hai pehle se ki vo kya copy ker rah hai to vo theek re hta hai
               disabled
               className="input input-bordered w-full p-2 mr-2"
+              placeholder="you profile url appears here"
             />
             <Button
               onClick={() => {
@@ -311,4 +312,4 @@ const page = () => {
     </>
   );
 };
-export default page;
+export default Page;

@@ -19,9 +19,7 @@ export function Example() {
           delay: 2000,
         }),
       ]}
-    >
-      // ...
-    </Carousel>
+    ></Carousel>
   );
 }
 const page = () => {

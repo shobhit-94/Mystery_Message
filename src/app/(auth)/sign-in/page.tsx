@@ -32,7 +32,7 @@ import { Link, Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { signInSchema } from "@/schemas/signInSchema";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -214,4 +214,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

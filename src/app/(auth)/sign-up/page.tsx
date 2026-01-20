@@ -23,7 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Link, Loader2 } from "lucide-react";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
@@ -260,4 +260,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

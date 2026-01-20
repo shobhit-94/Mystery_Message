@@ -8,7 +8,7 @@ import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 //ye file annonmys data show krne ke liye hota hai
 //[username] kerne se dynamic data load kera sakte hai
-const page = () => {
+const Page = () => {
   const { username } = useParams<{ username: string }>();
   const [message, setMessage] = useState("");
   const [isRotating, setIsRotating] = useState(false);
@@ -224,4 +224,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
