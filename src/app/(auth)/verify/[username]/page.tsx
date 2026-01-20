@@ -26,7 +26,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 const VerifyAccount = () => {
   const router = useRouter();
-  const param = useParams<{ username: string }>();
+  const param = useParams<{ username: string }>();//params me jo username aaya hai usko i=nikal re hai
   const form = useForm<z.infer<typeof verifySchema>>({
     //is form me bas signupschmea type ki values hi aa sakti hai humne set kerdiya z.infer se type
     //sari filed signup schea me hi hai or vaise hi same ype ki value hume sign-in me bhi chhiye to isliye

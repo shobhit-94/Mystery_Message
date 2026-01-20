@@ -19,7 +19,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link, Loader2 } from "lucide-react";
 
@@ -157,7 +157,7 @@ const page = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter username"
-                      {...field}//hum konsa field use ker re hai for ex yaha per username hai to "username" uper likho name="username"
+                      {...field} //hum konsa field use ker re hai for ex yaha per username hai to "username" uper likho name="username"
                       onChange={(e) => {
                         field.onChange(e);
                         debounced(e.target.value);
@@ -250,8 +250,9 @@ const page = () => {
         <div className="text-center mt-4">
           <p>
             Already a member?{``}
-            <a href="/sign-in"  className="text-blue-600 hover:text-blue-800">Sign in</a>
-   
+            <a href="/sign-in" className="text-blue-600 hover:text-blue-800">
+              Sign in
+            </a>
           </p>
         </div>
       </div>

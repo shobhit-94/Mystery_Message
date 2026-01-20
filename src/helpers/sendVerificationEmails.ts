@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import VerificationEmail from "../../emals/VerificationEmail";
 import { ApiResponse } from "@/types/ApiResponse";
-
+// https://react.email/docs/integrations/resend
 export async function sendVerification(
   email: string,
   username: string,

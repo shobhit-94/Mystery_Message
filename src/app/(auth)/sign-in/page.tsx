@@ -120,6 +120,7 @@ const page = () => {
   //   isCheckingUsername();
   // }, [username]);
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+    console.log("data = ",data)
     const result = await signIn("credentials", {
       redirect: false,
       identifier: data.identifier,

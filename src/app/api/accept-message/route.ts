@@ -22,6 +22,11 @@ export async function POST(request: Request) {
   }
 
   const { acceptMessage } = await request.json();
+  //body request husesha POST,PUT,PATCH me lagti hai khuch dalne ke liye
+  //query request humshe GET me lagti hai khuch nikalneke liye
+  // const { searchParams } = new URL(request.url);
+  // const acceptMessage = searchParams.get("acceptMessage");
+  console.log("acceptMessage = ", acceptMessage);
   try {
     const updateUser = await UserModel.findByIdAndUpdate(
       user._id,

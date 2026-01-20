@@ -34,7 +34,7 @@ const page = () => {
           </h1>
           <p>Explore Mystery Message - Where your identity remains a secret.</p>
         </section>
-        <div className="items-center bg-yellow-300 flex flex-row justify-center">
+        <div className="items-cente flex flex-row justify-center">
           <Carousel
             className="w-full max-w-xs"
             plugins={[

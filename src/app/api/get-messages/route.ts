@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   const session = await getServerSession(authOptions); //current logged in user chhiye jo seesion me humne store kiya tha option.ts file me
   //to getserversession se current Seesion me se hum current logged in user nikal lenge
   const user = session?.user;
-
+  console.log("session user in get-messages api ", user);
   if (!user || !session.user) {
     return Response.json(
       {

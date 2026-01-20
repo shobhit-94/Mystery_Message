@@ -9,7 +9,7 @@ export async function DELETE(request: Request) {
   await dbConnect();
   const session = await getServerSession(authOptions);
   const user = session?.user;
-  if (!user || session.user) {
+  if (!user || !session.user) {
     return Response.json(
       {
         success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
@@ -19,10 +19,17 @@ export async function DELETE(request: Request) {
     );
   }
   const { searchParams } = new URL(request.url);
-  const queryParam = { messageId: searchParams.get("messageId") };
+  const messageId =  searchParams.get("messageId") ;
+  if (!messageId) {
+    return Response.json(
+      { success: false, message: "Message ID required" },
+      { status: 400 }
+    );
+  }
+  console.log("messageId = ", messageId);
   const delete_Message = await UserModel.updateOne(
-    { id: user._id },
-    { $pull: { messags: { _id: queryParam } } }
+    { _id: user._id },
+    { $pull: { messages: { _id: messageId } } }
   );
   if (!delete_Message || delete_Message.modifiedCount === 0) {
     return Response.json(
@@ -36,7 +43,7 @@ export async function DELETE(request: Request) {
   return Response.json(
     {
       success: true, //kyuki user mil gya hai to regestration nhi ho sakta hai
-      messages: "message deleted successfully",
+      message: "message deleted successfully",
     },
     { status: 200 }
   );

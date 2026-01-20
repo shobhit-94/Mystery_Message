@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   const { prompt } = await req.json();
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: "gemini-2.5-flash", //model ka naam hai
     contents: prompt,
   });
   /*
@@ -34,10 +34,20 @@ Gemini starts talking
 
 You listen while it is talking
 */
+  if (!response) {
+    return Response.json(
+      {
+        success: false, //kyuki user mil gya hai to regestration nhi ho sakta hai
+        message: "response not recived",
+      },
+      { status: 401 }
+    );
+  }
   return Response.json(
     {
       success: true,
       text: response.text,
+      message: "Response generated successfully from google gemini ai",
     },
     { status: 200 }
   );

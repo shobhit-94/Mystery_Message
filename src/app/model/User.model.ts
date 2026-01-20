@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { required } from "yargs";
+
 export interface Message extends Document {
   content: string;
   createdAt: Date;

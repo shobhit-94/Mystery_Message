@@ -16,7 +16,8 @@ async function dbConnect(): Promise<void> {
   try {
     // Attempt to connect to the database
     console.log("MONGO URI:", process.env.MONGODB_URI);
-
+// ||"" typscript ke karan ye isliye hai ki agar hume string nhi mile to empty string de de taaki error na aaye
+   
     const db = await mongoose.connect(process.env.MONGODB_URI || '', {});
 
     connection.isConnected = db.connections[0].readyState;
