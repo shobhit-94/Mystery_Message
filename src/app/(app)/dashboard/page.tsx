@@ -105,6 +105,9 @@ const Page = () => {
       setIsSwitchLoading(false);
     }
   }, []);
+  useEffect(() => {
+    console.log("messages = ", messages);
+  }, [messages]);
   const fetchMessages = useCallback(
     async (refresh: boolean = false) => {
       setLoading(true);

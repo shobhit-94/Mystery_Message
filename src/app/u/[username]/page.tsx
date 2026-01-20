@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -49,7 +49,8 @@ const Page = () => {
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(
-        "Error " + axiosError.response?.data.message || "failed to send message"
+        "Error " + axiosError.response?.data.message ||
+          "failed to send message",
       );
     }
   };
@@ -65,8 +66,6 @@ const Page = () => {
       .replace(/_/g, "")
       .replace(/`/g, "")
       .replace(/:\s*$/gm, "");
-
-
 
     // Newlines
     cleaned = cleaned.replace(/\\n\\n/g, "\n");
@@ -100,12 +99,15 @@ const Page = () => {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(
         "Error " + axiosError.response?.data.message ||
-          "failed to fetch messages"
+          "failed to fetch messages",
       );
     } finally {
       setIsRotating(false);
     }
   };
+  useEffect(() => {
+    console.log("message = ", message);
+  }, [message]);
   return (
     <>
       <div
@@ -144,14 +146,7 @@ const Page = () => {
             )}
           </div>
           {message !== "" ? (
-            <form
-              id="send-message-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                sendMessage();
-                console.log("hello enter");
-              }}
-            >
+           
               <Button
                 form="send-message-form"
                 type="submit"
@@ -163,7 +158,7 @@ const Page = () => {
               >
                 Send it <i className="fa-solid fa-paper-plane"></i>
               </Button>
-            </form>
+            
           ) : (
             <Button disabled className="p-5 w-fit">
               Send it <i className="fa-solid fa-ban"></i>
